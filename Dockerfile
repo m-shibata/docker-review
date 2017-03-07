@@ -19,27 +19,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-## Install Re:VIEW and rake
-#
-RUN gem install review rake
-
 ## Set locale for Ruby
 #
 RUN locale-gen ja_JP.UTF-8
 ENV LANG ja_JP.UTF-8
 ENV LANGUAGE ja_JP:ja
 ENV LC_ALL ja_JP.UTF-8
-
-## Install epubcheck
-#
-ARG EPUBCHECK_VER
-ENV EPUBCHECK_VER ${EPUBCHECK_VER:-4.0.2}
-RUN wget -qO/tmp/epubcheck.zip \
-    https://github.com/IDPF/epubcheck/releases/download/v${EPUBCHECK_VER}/epubcheck-${EPUBCHECK_VER}.zip \
-    && cd /tmp \
-    && unzip epubcheck.zip \
-    && mv epubcheck-${EPUBCHECK_VER} /opt/epubcheck \
-    && rm epubcheck.zip
 
 ## Create working directory
 #
@@ -66,4 +51,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     fonts-noto-cjk \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+## Install epubcheck
+#
+ARG EPUBCHECK_VER
+ENV EPUBCHECK_VER ${EPUBCHECK_VER:-4.0.2}
+RUN wget -qO/tmp/epubcheck.zip \
+    https://github.com/IDPF/epubcheck/releases/download/v${EPUBCHECK_VER}/epubcheck-${EPUBCHECK_VER}.zip \
+    && cd /tmp \
+    && unzip epubcheck.zip \
+    && mv epubcheck-${EPUBCHECK_VER} /opt/epubcheck \
+    && rm epubcheck.zip
+
+## Install Re:VIEW and rake
+#
+ARG REVIEW_VER
+ENV REVIEW_VER ${REVIEW_VER:-2.1.0}
+RUN gem install rake review:${REVIEW_VER}
 
