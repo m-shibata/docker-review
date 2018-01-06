@@ -30,8 +30,10 @@ ENV LC_ALL ja_JP.UTF-8
 
 ## Create working directory
 #
-RUN mkdir /data
+RUN mkdir -p /data/texmf
 WORKDIR /data
+ARG TEXMFCACHE
+ENV TEXMFCACHE ${TEXMFCACHE:-/data/texmf}
 
 ## Install pacakges for Re:VIEW/PDF
 #
