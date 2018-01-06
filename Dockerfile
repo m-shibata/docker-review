@@ -34,6 +34,8 @@ RUN mkdir -p /data/texmf
 WORKDIR /data
 ARG TEXMFCACHE
 ENV TEXMFCACHE ${TEXMFCACHE:-/data/texmf}
+ENV TEXMFSYSVAR ${TEXMFCACHE:-/data/texmf}
+ENV TEXMFVAR ${TEXMFCACHE:-/data/texmf}
 
 ## Install pacakges for Re:VIEW/PDF
 #
