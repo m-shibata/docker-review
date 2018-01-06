@@ -1,4 +1,4 @@
-FROM ubuntu:16.10
+FROM ubuntu:rolling
 MAINTAINER Mitsuya Shibata
 
 ## Prepare for package manager
@@ -9,6 +9,7 @@ RUN sed -i.bak "s,/\(archive.ubuntu.com\),/jp.\1,g" /etc/apt/sources.list
 #
 #   - For Re:VIEW: ruby, zip
 #   - For epubcheck: default-jre, unzip, wget
+#   - For ja_JP.UTF-8: locales
 #
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ruby \
@@ -16,6 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     default-jre \
     unzip \
     wget \
+    locales \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -35,20 +37,21 @@ WORKDIR /data
 #
 #   - For TeX: texlive-*
 #   - For tlmgr: wget, xzde
-#   - For LuaTeX: texlive-xetex, texlive-luatex
-#   - For dependency of LuaTeX: fonts-lmodern (fixed after 17.04)
-#   - For bold sanserif font: fonts-noto-cjk
+#   - For LuaTeX: texlive-luatex, lmodern
+#   - For fonts: fonts-noto-cjk fonts-noto-cjk-extra
+#   - For make: make
 #
 RUN apt-get update && apt-get install -y --no-install-recommends \
     texlive-lang-japanese \
     texlive-latex-extra \
     texlive-fonts-recommended \
-    texlive-xetex \
     texlive-luatex \
+    lmodern \
     wget \
     xzdec \
-    fonts-lmodern \
     fonts-noto-cjk \
+    fonts-noto-cjk-extra \
+    make \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
