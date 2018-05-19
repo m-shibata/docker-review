@@ -1,10 +1,10 @@
 # Re:VIEW container for Docker
 
-Re:VIEW container is Docker image to generate EPUB/PDF by Re:VIEW.
+Re:VIEW container is Docker image to generate EPUB/PDF by [Re:VIEW](http://reviewml.org/).
 
 ## Usage
 
-Install Docker image.
+Install Docker image from [DockerHub](https://hub.docker.com/r/mshibata/docker-review/).
 
 ```
 $ docker pull mshibata/docker-review
