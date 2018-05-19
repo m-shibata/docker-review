@@ -31,7 +31,7 @@ $ docker run --rm -v ~/book/vol1:/data mshibata/docker-review rake pdf
 Validate EPUB file.
 
 ```
-$ docker run --rm -v ~/book/vol1:/data review/pdf java -jar /opt/epubcheck/epubcheck.jar book.epub
+$ docker run --rm -v ~/book/vol1:/data mshibata/docker-review java -jar /opt/epubcheck/epubcheck.jar book.epub
 ```
 
 ## License
