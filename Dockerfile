@@ -40,7 +40,7 @@ ENV TEXMFVAR ${TEXMFCACHE:-/data/texmf}
 ## Install pacakges for Re:VIEW/PDF
 #
 #   - For TeX: texlive-*
-#   - For tlmgr: wget, xzde
+#   - For tlmgr: wget, xzdec
 #   - For LuaTeX: texlive-luatex, lmodern
 #   - For fonts: fonts-noto-cjk fonts-noto-cjk-extra
 #   - For make: make
