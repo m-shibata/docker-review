@@ -62,9 +62,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ## Install epubcheck
 #
 ARG EPUBCHECK_VER
-ENV EPUBCHECK_VER ${EPUBCHECK_VER:-4.0.2}
+ENV EPUBCHECK_VER ${EPUBCHECK_VER:-4.1.0}
 RUN wget -qO/tmp/epubcheck.zip \
-    https://github.com/IDPF/epubcheck/releases/download/v${EPUBCHECK_VER}/epubcheck-${EPUBCHECK_VER}.zip \
+    https://github.com/w3c/epubcheck/releases/download/v${EPUBCHECK_VER}/epubcheck-${EPUBCHECK_VER}.zip \
     && cd /tmp \
     && unzip epubcheck.zip \
     && mv epubcheck-${EPUBCHECK_VER} /opt/epubcheck \
