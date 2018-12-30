@@ -40,7 +40,7 @@ ENV TEXMFVAR ${TEXMFCACHE:-/data/texmf}
 ## Install pacakges for Re:VIEW/PDF
 #
 #   - For TeX: texlive-*
-#   - For tlmgr: wget, xzde
+#   - For tlmgr: wget, xzdec
 #   - For LuaTeX: texlive-luatex, lmodern
 #   - For fonts: fonts-noto-cjk fonts-noto-cjk-extra
 #   - For make: make
@@ -62,9 +62,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ## Install epubcheck
 #
 ARG EPUBCHECK_VER
-ENV EPUBCHECK_VER ${EPUBCHECK_VER:-4.0.2}
+ENV EPUBCHECK_VER ${EPUBCHECK_VER:-4.1.0}
 RUN wget -qO/tmp/epubcheck.zip \
-    https://github.com/IDPF/epubcheck/releases/download/v${EPUBCHECK_VER}/epubcheck-${EPUBCHECK_VER}.zip \
+    https://github.com/w3c/epubcheck/releases/download/v${EPUBCHECK_VER}/epubcheck-${EPUBCHECK_VER}.zip \
     && cd /tmp \
     && unzip epubcheck.zip \
     && mv epubcheck-${EPUBCHECK_VER} /opt/epubcheck \
@@ -73,6 +73,6 @@ RUN wget -qO/tmp/epubcheck.zip \
 ## Install Re:VIEW and rake
 #
 ARG REVIEW_VER
-ENV REVIEW_VER ${REVIEW_VER:-2.5.0}
+ENV REVIEW_VER ${REVIEW_VER:-3.0.0}
 RUN gem install rake review:${REVIEW_VER}
 
