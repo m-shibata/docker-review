@@ -76,5 +76,11 @@ RUN wget -qO/tmp/epubcheck.zip \
 #
 ARG REVIEW_VER
 ENV REVIEW_VER ${REVIEW_VER:-3.0.0}
-RUN gem install rake review:${REVIEW_VER}
-
+#RUN gem install rake review:${REVIEW_VER}
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    ruby-bundler \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+RUN cd ~/ && git clone https://github.com/kmuto/review.git
+RUN cd ~/review && rake install
