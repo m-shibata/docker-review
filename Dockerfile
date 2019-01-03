@@ -55,6 +55,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     xzdec \
     fonts-noto-cjk \
     fonts-noto-cjk-extra \
+    fonts-noto-mono \
     make \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
