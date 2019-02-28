@@ -75,6 +75,6 @@ RUN wget -qO/tmp/epubcheck.zip \
 ## Install Re:VIEW and rake
 #
 ARG REVIEW_VER
-ENV REVIEW_VER ${REVIEW_VER:-3.0.0}
+ENV REVIEW_VER ${REVIEW_VER:-3.1.0}
 RUN gem install rake review:${REVIEW_VER}
 
