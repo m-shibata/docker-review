@@ -76,20 +76,17 @@ RUN wget -qO/tmp/epubcheck.zip \
 ## Install Re:VIEW and rake
 #
 ARG REVIEW_VER
-ENV REVIEW_VER ${REVIEW_VER:-3.0.0}
-#RUN gem install rake review:${REVIEW_VER}
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    git \
-    ruby-bundler \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-RUN cd ~/ && git clone https://github.com/kmuto/review.git
-RUN cd ~/review && rake install
+ENV REVIEW_VER ${REVIEW_VER:-3.2.0}
+RUN gem install rake review:${REVIEW_VER}
 
 # Install Latest jlreq
 #
 ARG JLREQ_REV
-ENV JLREQ_REV ${JLREQ_REV:-master}
+ENV JLREQ_REV ${JLREQ_REV:-abenori_dev}
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 RUN cd ~/ && git clone -b abenori_dev https://github.com/abenori/jlreq.git
 RUN cd ~/jlreq && git checkout ${JLREQ_REV} && \
     make && make install
