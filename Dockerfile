@@ -49,6 +49,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     texlive-lang-japanese \
     texlive-latex-extra \
     texlive-fonts-recommended \
+    texlive-plain-generic \
     texlive-luatex \
     lmodern \
     wget \
@@ -77,4 +78,17 @@ RUN wget -qO/tmp/epubcheck.zip \
 ARG REVIEW_VER
 ENV REVIEW_VER ${REVIEW_VER:-3.2.0}
 RUN gem install rake review:${REVIEW_VER}
+
+# Install Latest jlreq
+#
+ARG JLREQ_REV
+#ENV JLREQ_REV ${JLREQ_REV:-abenori_dev}
+ENV JLREQ_REV ${JLREQ_REV:-e8080754ff33a9fde30f828742c00d2c851b2ede}
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+RUN cd ~/ && git clone -b abenori_dev https://github.com/abenori/jlreq.git
+RUN cd ~/jlreq && git checkout ${JLREQ_REV} && \
+    make && make install
 
