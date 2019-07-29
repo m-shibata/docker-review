@@ -82,8 +82,7 @@ RUN gem install rake review:${REVIEW_VER}
 # Install Latest jlreq
 #
 ARG JLREQ_REV
-#ENV JLREQ_REV ${JLREQ_REV:-abenori_dev}
-ENV JLREQ_REV ${JLREQ_REV:-e8080754ff33a9fde30f828742c00d2c851b2ede}
+ENV JLREQ_REV ${JLREQ_REV:-abenori_dev}
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     && apt-get clean \
