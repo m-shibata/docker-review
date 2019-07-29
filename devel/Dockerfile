@@ -49,6 +49,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     texlive-lang-japanese \
     texlive-latex-extra \
     texlive-fonts-recommended \
+    texlive-plain-generic \
     texlive-luatex \
     lmodern \
     wget \
@@ -84,3 +85,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 RUN cd ~/ && git clone https://github.com/kmuto/review.git
 RUN cd ~/review && rake install
+
+# Install Latest jlreq
+#
+ARG JLREQ_REV
+ENV JLREQ_REV ${JLREQ_REV:-abenori_dev}
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+RUN cd ~/ && git clone -b abenori_dev https://github.com/abenori/jlreq.git
+RUN cd ~/jlreq && git checkout ${JLREQ_REV} && \
+    make && make install
+
