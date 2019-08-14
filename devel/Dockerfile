@@ -75,16 +75,16 @@ RUN wget -qO/tmp/epubcheck.zip \
 
 ## Install Re:VIEW and rake
 #
-ARG REVIEW_VER
-ENV REVIEW_VER ${REVIEW_VER:-3.0.0}
-#RUN gem install rake review:${REVIEW_VER}
+ARG REVIEW_REV
+ENV REVIEW_REV ${REVIEW_REV:-master}
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     ruby-bundler \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 RUN cd ~/ && git clone https://github.com/kmuto/review.git
-RUN cd ~/review && rake install
+RUN cd ~/review && git checkout ${REVIEW_REV} && \
+    rake install
 
 # Install Latest jlreq
 #
