@@ -40,6 +40,7 @@ ENV TEXMFVAR ${TEXMFCACHE:-/data/texmf}
 ## Install pacakges for Re:VIEW/PDF
 #
 #   - For TeX: texlive-*
+#   - For awesome font: texlive-fonts-extra
 #   - For tlmgr: wget, xzdec
 #   - For LuaTeX: texlive-luatex, lmodern
 #   - For fonts: fonts-noto-cjk fonts-noto-cjk-extra
@@ -49,6 +50,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     texlive-lang-japanese \
     texlive-latex-extra \
     texlive-fonts-recommended \
+    texlive-fonts-extra \
     texlive-plain-generic \
     texlive-luatex \
     lmodern \
