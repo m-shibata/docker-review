@@ -40,7 +40,6 @@ ENV TEXMFVAR ${TEXMFCACHE:-/data/texmf}
 ## Install pacakges for Re:VIEW/PDF
 #
 #   - For TeX: texlive-*
-#   - For awesome font: texlive-fonts-extra
 #   - For tlmgr: wget, xzdec
 #   - For LuaTeX: texlive-luatex, lmodern
 #   - For fonts: fonts-noto-cjk fonts-noto-cjk-extra
@@ -50,7 +49,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     texlive-lang-japanese \
     texlive-latex-extra \
     texlive-fonts-recommended \
-    texlive-fonts-extra \
     texlive-plain-generic \
     texlive-luatex \
     lmodern \
@@ -63,6 +61,23 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     make \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+## Install Font Awesome5 for TeX
+#
+RUN wget -qO/tmp/fontawesome5.zip \
+    http://mirrors.ctan.org/fonts/fontawesome5.zip \
+    && cd /tmp \
+    && unzip fontawesome5.zip \
+    && mkdir $(kpsewhich -var-value TEXMFLOCAL)/fonts/ \
+    && mv fontawesome5/enc $(kpsewhich -var-value TEXMFLOCAL)/fonts/ \
+    && mv fontawesome5/opentype $(kpsewhich -var-value TEXMFLOCAL)/fonts/ \
+    && mv fontawesome5/tfm $(kpsewhich -var-value TEXMFLOCAL)/fonts/ \
+    && mv fontawesome5/map $(kpsewhich -var-value TEXMFLOCAL)/fonts/ \
+    && mv fontawesome5/tex $(kpsewhich -var-value TEXMFLOCAL)/ \
+    && mv fontawesome5/type1 $(kpsewhich -var-value TEXMFLOCAL)/fonts/ \
+    && rm -rf fontawesome5/ \
+    && rm fontawesome5.zip \
+    && mktexlsr
 
 ## Install epubcheck
 #
