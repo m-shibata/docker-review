@@ -14,24 +14,36 @@ Create Re:VIEW template.
 
 ```
 $ mkdir ~/book
-$ docker run --rm -v ~/book:/data mshibata/docker-review review-init vol1
+$ docker run --user $UID --rm -v ~/book:/data mshibata/docker-review review-init vol1
 ```
 
 Generate EPUB file.
 
 ```
-$ docker run --rm -v ~/book/vol1:/data mshibata/docker-review rake epub
+$ docker run --user $UID --rm -v ~/book/vol1:/data mshibata/docker-review rake epub
 ```
 
 Generate PDF file.
+
 ```
-$ docker run --rm -v ~/book/vol1:/data mshibata/docker-review rake pdf
+$ docker run --user $UID --rm -v ~/book/vol1:/data mshibata/docker-review rake pdf
 ```
 
 Validate EPUB file.
 
 ```
-$ docker run --rm -v ~/book/vol1:/data mshibata/docker-review java -jar /opt/epubcheck/epubcheck.jar book.epub
+$ docker run --user $UID --rm -v ~/book/vol1:/data mshibata/docker-review java -jar /opt/epubcheck/epubcheck.jar book.epub
+```
+
+Use review-jlreq template.
+
+```
+$ docker run --user $UID --rm -v ~/book:/data mshibata/docker-review review-init \
+  --latex-template=review-jlreq jlreq
+$ docker run --user $UID --rm -v ~/book/jlreq:/data mshibata/docker-review rake pdf
+$ docker run --user $UID --rm -v ~/book/jlreq:/data mshibata/docker-review rake clean
+$ echo -e "texcommand: \"lualatex\"\ndvicommand: \"\"" >> config.yml
+$ docker run --user $UID --rm -v ~/book/jlreq:/data mshibata/docker-review rake pdf
 ```
 
 ## License
