@@ -42,7 +42,7 @@ $ docker run --user $UID --rm -v ~/book:/data mshibata/docker-review review-init
   --latex-template=review-jlreq jlreq
 $ docker run --user $UID --rm -v ~/book/jlreq:/data mshibata/docker-review rake pdf
 $ docker run --user $UID --rm -v ~/book/jlreq:/data mshibata/docker-review rake clean
-$ echo -e "texcommand: \"lualatex\"\ndvicommand: \"\"" >> config.yml
+$ echo -e "texcommand: \"lualatex\"\ndvicommand: \"\"" >> ~/book/config.yml
 $ docker run --user $UID --rm -v ~/book/jlreq:/data mshibata/docker-review rake pdf
 ```
 
