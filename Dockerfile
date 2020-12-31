@@ -82,7 +82,7 @@ RUN wget -qO/tmp/fontawesome5.zip \
 ## Install epubcheck
 #
 ARG EPUBCHECK_VER
-ENV EPUBCHECK_VER ${EPUBCHECK_VER:-4.2.2}
+ENV EPUBCHECK_VER ${EPUBCHECK_VER:-4.2.4}
 RUN wget -qO/tmp/epubcheck.zip \
     https://github.com/w3c/epubcheck/releases/download/v${EPUBCHECK_VER}/epubcheck-${EPUBCHECK_VER}.zip \
     && cd /tmp \
@@ -93,7 +93,7 @@ RUN wget -qO/tmp/epubcheck.zip \
 ## Install Re:VIEW and rake
 #
 ARG REVIEW_VER
-ENV REVIEW_VER ${REVIEW_VER:-4.2.0}
+ENV REVIEW_VER ${REVIEW_VER:-5.0.0}
 RUN gem install rake review:${REVIEW_VER}
 
 # Install Latest jlreq
