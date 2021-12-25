@@ -1,0 +1,30 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Login to Docker Hub
+      uses: actions-hub/docker/login@master
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_REGISTRY_URL: docker.io
+
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag mshibata/docker-review:latest
+
+    - name: Deploy :latest
+      if: success()
+      uses: actions-hub/docker@master
+      with:
+        args: push mshibata/docker-review:latest
