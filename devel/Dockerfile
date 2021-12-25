@@ -45,7 +45,8 @@ ENV TEXMFVAR ${TEXMFCACHE:-/data/texmf}
 #   - For fonts: fonts-noto-cjk fonts-noto-cjk-extra
 #   - For make: make
 #
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && DEBIAN_FRONTEND=noniteractive \
+    apt-get install -y --no-install-recommends \
     texlive-lang-japanese \
     texlive-latex-extra \
     texlive-fonts-recommended \
