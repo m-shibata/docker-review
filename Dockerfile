@@ -34,8 +34,9 @@ RUN mkdir -p /data/texmf
 WORKDIR /data
 ARG TEXMFCACHE
 ENV TEXMFCACHE ${TEXMFCACHE:-/data/texmf}
-ENV TEXMFSYSVAR ${TEXMFCACHE:-/data/texmf}
-ENV TEXMFVAR ${TEXMFCACHE:-/data/texmf}
+# Workaround for TeX Live 2020
+#ENV TEXMFSYSVAR ${TEXMFCACHE:-/data/texmf}
+#ENV TEXMFVAR ${TEXMFCACHE:-/data/texmf}
 
 ## Install pacakges for Re:VIEW/PDF
 #
@@ -45,7 +46,8 @@ ENV TEXMFVAR ${TEXMFCACHE:-/data/texmf}
 #   - For fonts: fonts-noto-cjk fonts-noto-cjk-extra
 #   - For make: make
 #
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && DEBIAN_FRONTEND=noniteractive \
+    apt-get install -y --no-install-recommends \
     texlive-lang-japanese \
     texlive-latex-extra \
     texlive-fonts-recommended \
@@ -82,7 +84,7 @@ RUN wget -qO/tmp/fontawesome5.zip \
 ## Install epubcheck
 #
 ARG EPUBCHECK_VER
-ENV EPUBCHECK_VER ${EPUBCHECK_VER:-4.2.4}
+ENV EPUBCHECK_VER ${EPUBCHECK_VER:-4.2.6}
 RUN wget -qO/tmp/epubcheck.zip \
     https://github.com/w3c/epubcheck/releases/download/v${EPUBCHECK_VER}/epubcheck-${EPUBCHECK_VER}.zip \
     && cd /tmp \
